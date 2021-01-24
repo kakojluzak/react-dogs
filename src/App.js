@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import Navbar from './navbar/navbar.js';
 import DogsList from './dogsList/dogsList.js';
 import Gallery from './gallery/gallery.js';
-import logo from './logo.svg';
 
 import './App.css';
-
-
 
 class App extends Component {
   constructor(props) {
@@ -24,23 +20,17 @@ class App extends Component {
       })
       .then((dogs) => {
         this.setState({
+          isShown:false,
           dogs: dogs.message,
-          selectedDog: dogs.message[0]
+          selectedDog: []
         });
         return fetch(`https://dog.ceo/api/breed/${dogs.message[0]}/images`)
       })
-      .then((res) => {
-        return res.json();
-      })
-      .then((images) => {
-        this.setState({
-          images: images.message
-        });
-      })
   }
 
-  dogClicked(breed) {
+  dogClicked = (breed) => {
     this.setState({
+      isShown:true,
       images: [],
       selectedDog: breed
     });
@@ -58,14 +48,13 @@ class App extends Component {
   render() {
     return (
       <div className="content-container">
-        <Navbar heading ="Dogs Database"></Navbar>
         <div className="row">
-        <div className="col-3">
-          <DogsList dogs={this.state.dogs} selectedDog={this.state.selectedDog} handleClick={this.dogClicked.bind(this)}/>
-        </div>
-        <div className="col-9">
-          <Gallery images={this.state.images} />
-        </div>        
+          <div className="col-3">
+            <DogsList dogs={this.state.dogs} selectedDog={this.state.selectedDog} handleClick={this.dogClicked}/>
+          </div>
+          <div className="col-9">
+            <Gallery isShown={this.state.isShown} images={this.state.images} />
+          </div>        
         </div>
       </div>
       );

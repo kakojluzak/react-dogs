@@ -1,6 +1,4 @@
-# React Dogs
-
-React sample using the open dogs api https://dog.ceo/dog-api/
+# DOGS
 
 created using create-react-app
 
@@ -10,7 +8,4 @@ git clone
 npm install
 npm run start
 
-## License
-
-This project is licensed under the MIT License
-
+## if photo is not showing wait until it loads
